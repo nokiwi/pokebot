@@ -5,9 +5,8 @@ const client = new Discord.Client();
 
 // import fs module
 var fs = require("fs");
-fs.readFile("./pokemon.txt", function(text) {
-    var pokemon = fs.readFileSync("./pokemon.txt").toString('utf-8');
-});
+var pokemon = fs.readFileSync("./pokemon.txt", 'utf-8').split('\n');
+var images = fs.readFileSync("./pokemonpics.txt", 'utf-8').split('\n');
 
 client.on('ready', () => {
     console.log("Connected as " + client.user.tag);
@@ -19,14 +18,16 @@ client.on('message', (receivedMessage) => {
     
     catchPokemon(receivedMessage);
 
-    processMessage(receivedMessage);
+    //processMessage(receivedMessage);
 });
 
 async function catchPokemon(receivedMessage) {
-    console.log()
-    receivedMessage.reply("you caught a " + pokemon[Math.floor.random() * pokemon.length]);
+    console.log(receivedMessage.content + " received");
+    //receivedMessage.reply("you caught a " + pokemon[Math.floor(Math.random() * 152)]);
+    receivedMessage.reply("you caught a " + pokemon[Math.floor(Math.random() * 152)], {files: ["https://c.tenor.com/_B4QaT_C3WsAAAAM/bulbasaur-pokemon.gif"]});
 }
 
+/*
 async function processMessage(receivedMessage) {
     console.log(receivedMessage.content + " received");
 
@@ -40,5 +41,6 @@ async function processMessage(receivedMessage) {
         receivedMessage.reply("BEEPSHOP");
     }
 }
+*/
 
 client.login(token);
